@@ -1,0 +1,48 @@
+# ==========================================
+# GCP Project & Region
+# ==========================================
+project_id       = "your-gcp-project-id"
+region            = "us-central1"
+
+# ==========================================
+# Terraform State Backend
+# ==========================================
+backend_bucket   = "your-tfstate-bucket"
+backend_prefix    = "terraform-iam-rbac"
+
+# ==========================================
+# Team Permissions (Google Groups → Roles)
+# ==========================================
+team_permissions = {
+  "devops-team@yourdomain.com" = [
+    "roles/compute.admin",
+    "roles/run.admin",
+    "roles/cloudbuild.admin",
+    "roles/storage.admin"
+  ],
+  "dev-team@yourdomain.com" = [
+    "roles/compute.viewer",
+    "roles/run.developer",
+    "roles/cloudbuild.editor",
+    "roles/storage.objectUser"
+  ]
+}
+
+# ==========================================
+# Group Names
+# ==========================================
+devops_group_name    = "devops-team@yourdomain.com"
+developer_group_name = "dev-team@yourdomain.com"
+
+# ==========================================
+# Team Members
+# ==========================================
+devops_members = [
+  "bob.ops@yourdomain.com",
+  "charlie.ops@yourdomain.com"
+]
+
+developer_members = [
+  "alice.dev@yourdomain.com",
+  "eve.dev@yourdomain.com"
+]
