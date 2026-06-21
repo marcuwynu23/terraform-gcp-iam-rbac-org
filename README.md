@@ -166,4 +166,18 @@ module "iam_rbac_org" {
 }
 ```
 
-All [variables](#variables) documented below are available when using this as a module.
+---
+
+## Variables
+
+| Variable | Description | Type | Default |
+|----------|-------------|------|---------|
+| `project_id` | GCP project ID | `string` | (required) |
+| `region` | GCP region | `string` | `"us-central1"` |
+| `backend_bucket` | GCS bucket for remote state | `string` | `"iammwwhobuild-tfstate-bucket"` |
+| `backend_prefix` | Prefix in GCS bucket for state files | `string` | `"terraform-iam-rbac"` |
+| `team_permissions` | Map of groups to their assigned GCP roles | `map(list(string))` | See defaults in `variables.tf` |
+| `devops_members` | Users to add to the DevOps group | `list(string)` | See defaults in `variables.tf` |
+| `developer_members` | Users to add to the Developer group | `list(string)` | See defaults in `variables.tf` |
+| `devops_group_name` | DevOps Google Group name | `string` | `"devops-team@yourdomain.com"` |
+| `developer_group_name` | Developer Google Group name | `string` | `"dev-team@yourdomain.com"` |
