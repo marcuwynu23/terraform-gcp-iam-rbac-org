@@ -121,8 +121,49 @@ sequenceDiagram
    terraform plan
    ```
 
-7. **Apply Changes**:
+7.  **Apply Changes**:
 
-   ```bash
-   terraform apply
-   ```
+    ```bash
+    terraform apply
+    ```
+
+---
+
+## Usage as a Module
+
+Reference this repository as a Terraform module in your own configurations:
+
+```hcl
+module "iam_rbac_org" {
+  source = "github.com/marcuwynu23/terraform-gcp-iam-rbac-org?ref=main"
+
+  project_id = var.project_id
+  region     = "us-central1"
+
+  team_permissions = {
+    "devops-team@yourdomain.com" = [
+      "roles/compute.admin",
+      "roles/run.admin",
+      "roles/storage.admin"
+    ],
+    "dev-team@yourdomain.com" = [
+      "roles/compute.viewer",
+      "roles/run.developer"
+    ]
+  }
+
+  devops_group_name    = "devops-team@yourdomain.com"
+  developer_group_name = "dev-team@yourdomain.com"
+
+  devops_members = [
+    "bob@yourdomain.com",
+    "charlie@yourdomain.com"
+  ]
+
+  developer_members = [
+    "alice@yourdomain.com"
+  ]
+}
+```
+
+All [variables](#variables) documented below are available when using this as a module.
