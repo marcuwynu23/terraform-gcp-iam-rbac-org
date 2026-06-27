@@ -13,10 +13,7 @@ terraform {
   # GCS automatically supports native state locking. If Engineer A runs 'apply',
   # GCS locks the file. If Engineer B tries to run 'apply' concurrently, 
   # Terraform will stop them and say "State locked!".
-  backend "gcs" {
-		bucket = var.backend_bucket
-		prefix = var.backend_prefix # Optional: Organizes state files under this path in the bucket
-  }
+  backend "gcs" {} # Configure via -backend-config during init (see cd.yml)
 }
 
 provider "google" {
@@ -54,7 +51,7 @@ resource "google_project_iam_member" "global_multi_team_access" {
 # Loops through and assigns users to the DevOps Google Group
 resource "google_cloud_identity_group_membership" "devops_users" {
   for_each = toset(var.devops_members)
-  group    = "groups/${var.devops_group_name}" 
+  group    = "groups/${var.devops_group_name}"
 
   preferred_member_key {
     id = each.value
@@ -67,7 +64,7 @@ resource "google_cloud_identity_group_membership" "devops_users" {
 # Loops through and assigns users to the Developer Google Group
 resource "google_cloud_identity_group_membership" "developer_users" {
   for_each = toset(var.developer_members)
-  group    = "groups/${var.developer_group_name}" 
+  group    = "groups/${var.developer_group_name}"
 
   preferred_member_key {
     id = each.value
