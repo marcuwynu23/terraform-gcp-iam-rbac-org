@@ -1,20 +1,3 @@
-# ==========================================
-# 1. TERRAFORM SETTINGS & REMOTE STATE LOCKING
-# ==========================================
-terraform {
-  required_providers {
-    google = {
-      source  = "hashicorp/google"
-      version = "~> 7.0"
-    }
-  }
-
-  # This block forces Terraform to store the state centrally in GCS.
-  # GCS automatically supports native state locking. If Engineer A runs 'apply',
-  # GCS locks the file. If Engineer B tries to run 'apply' concurrently, 
-  # Terraform will stop them and say "State locked!".
-  backend "gcs" {} # Configure via -backend-config during init (see cd.yml)
-}
 
 provider "google" {
   project = var.project_id
