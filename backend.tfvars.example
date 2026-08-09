@@ -3,5 +3,5 @@
 #
 # Then use with: terraform init -backend-config="backend.tfvars"
 
-bucket_name   = "[username]-terraform-state-bucket"
-bucket_prefix = "gcp-iam-rbac-org"
+bucket   = "[username]-terraform-state-bucket"
+prefix = "gcp-iam-rbac-org"
